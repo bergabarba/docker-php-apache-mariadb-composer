@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  # Serviço do Servidor Web (Apache + PHP)
+  web:
+    build:
+      context: . # Constrói a imagem a partir do Dockerfile na raiz
+      dockerfile: Dockerfile
+    container_name: apache_php_app
+    depends_on:
+      - db # Garante que o banco de dados inicie antes do servidor web
+    volumes:
+      - ./ecommerce:/var/www/html # Mapeia seu código para dentro do contêiner
+    ports:
+      - "8080:80" # Acessa no navegador via http://localhost:8080
+    restart: unless-stopped
+    networks:
+      - app-network
+  # Serviço do Banco de Dados MariaDB
+  db:
+    image: mariadb:10.4  # Versão exata que você usa
+    container_name: mariadb_app
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: 'db_ecommerce'
+      MYSQL_USER: 'root'
+      MYSQL_PASSWORD: 'Senhasuperforte2025@'
+      MYSQL_ROOT_PASSWORD: 'Senhasuperforte2025@'
+    volumes:
+      - db_data:/var/lib/mysql # Volume para persistir os dados do banco
+      # Mapeia o nosso script para ser executado na inicialização
+      - ./docker/mariadb/init:/docker-entrypoint-initdb.d
+    ports:
+      - "3306:3306" # Mapeia a porta para acesso externo (ex: via HeidiSQL/DBeaver)
+    networks:
+      - app-network
+
+volumes:
+  db_data: # Declaração do volume
+
+networks:
+  app-network:
+    driver: bridge
+ 
