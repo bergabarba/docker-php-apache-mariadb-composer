@@ -1,6 +1,6 @@
 # Ambiente de Desenvolvimento Docker com aplicacao de exemplo para E-commerce com PHP e Slim
 # O projeto de estudos para ilustrar a configuracao do ambiente de desenvolvimento git abaixo
-#  github do projeto (https://github.com/hcodebr/ecommerce)
+# Github do projeto da aplicacao de exemplo na construcao do ambiente (https://github.com/hcodebr/ecommerce)
 
 Este guia documenta a configuração de um ambiente de desenvolvimento local conteinerizado para uma aplicação de e-commerce feita em PHP, utilizando o micro-framework Slim, um servidor web Apache e um banco de dados MariaDB.
 
